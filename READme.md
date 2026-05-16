@@ -77,43 +77,89 @@ Data is preprocessed before training:
 ---
 
 ## 📁 Project Structure
+
+```bash
 customer-segmentation-django-ml/
 │
-├── app/ # Django app
-│ ├── views.py
-│ ├── urls.py
-│ ├── models.py
-│ └── templates/
+├── app/                    # Django app
+│   ├── views.py
+│   ├── urls.py
+│   ├── models.py
+│   └── templates/
 │
 ├── ml_model/
-│ ├── model.pkl
-│ ├── scaler.pkl
+│   ├── model.pkl
+│   ├── scaler.pkl
 │
 ├── static/
 ├── media/
 ├── manage.py
 ├── requirements.txt
 └── README.md
+```
 
-###  How to Run Locally
-1️⃣ Clone the repository
---git clone https://github.com/Sk2059/customer-segmentation-django-ml.git
---cd customer-segmentation-django-ml
-
-2️⃣ Create virtual environment
---python -m venv env
---source env/bin/activate   # Linux/Mac
---env\Scripts\activate      # Windows
-
-3️⃣ Install dependencies
---pip install -r requirements.txt
-
-4️⃣ Run migrations
---python manage.py migrate
-
-5️⃣ Start server
---python manage.py runserver
 ---
+
+# ▶️ How to Run Locally
+
+## 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/Sk2059/customer-segmentation-django-ml.git
+cd customer-segmentation-django-ml
+```
+
+---
+
+## 2️⃣ Create Virtual Environment
+
+```bash
+python -m venv env
+```
+
+### Activate Virtual Environment
+
+#### Windows
+```bash
+env\Scripts\activate
+```
+
+#### Linux / Mac
+```bash
+source env/bin/activate
+```
+
+---
+
+## 3️⃣ Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 4️⃣ Run Migrations
+
+```bash
+python manage.py migrate
+```
+
+---
+
+## 5️⃣ Start Development Server
+
+```bash
+python manage.py runserver
+```
+
+---
+
+## 🌐 Open in Browser
+
+```bash
+http://127.0.0.1:8000/
+```
 
 ## 🧪 Model Details
 
