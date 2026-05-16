@@ -3,7 +3,11 @@
 An end-to-end Machine Learning + Django web application that performs customer segmentation using clustering techniques (K-Means).
 The system groups customers based on behavioral and demographic data to help businesses improve targeted marketing, personalization, and decision-making.
 
+🚀 Live Demo
 
+(Optional — add if deployed on Render / Railway / Heroku)
+
+https://your-deployment-link.com
 📌 Project Overview
 
 Customer segmentation is an unsupervised machine learning technique used to divide customers into meaningful groups based on patterns in data.
