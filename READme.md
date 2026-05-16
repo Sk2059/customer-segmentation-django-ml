@@ -79,22 +79,30 @@ Data is preprocessed before training:
 ## 📁 Project Structure
 
 ```bash
-customer-segmentation-django-ml/
+customer_segmentation_django/
 │
-├── app/                    # Django app
+├── config/
+│
+├── segmentation/
+│   ├── migrations/
+│   ├── templates/
+│   ├── static/
 │   ├── views.py
 │   ├── urls.py
-│   ├── models.py
-│   └── templates/
+│   ├── forms.py
+│   └── models.py
 │
-├── ml_model/
+├── notebooks/
+│   └── segmentation.ipynb
+│
+├── ml/
 │   ├── model.pkl
 │   ├── scaler.pkl
+│   └── pca.pkl
 │
-├── static/
 ├── media/
-├── manage.py
 ├── requirements.txt
+├── manage.py
 └── README.md
 ```
 
