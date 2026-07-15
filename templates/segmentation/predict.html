@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Segmentation</title>
+<style>
+  :root {
+    --bg: #0f1720;
+    --panel: #16212c;
+    --line: #263340;
+    --text: #e7edf3;
+    --muted: #8a99a8;
+    --accent: #4fd1c5;
+    --accent-dim: #2c7a72;
+    --mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    padding: 48px 20px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 8px;
+  }
+  h1 {
+    font-size: 28px;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .sub {
+    color: var(--muted);
+    margin: 0 0 32px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 28px;
+  }
+  .field { margin-bottom: 20px; }
+  .field:last-of-type { margin-bottom: 0; }
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .help {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 8px;
+  }
+  input[type="number"] {
+    width: 100%;
+    background: #0f1720;
+    border: 1px solid var(--line);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-family: var(--mono);
+    font-size: 14px;
+  }
+  input[type="number"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(79, 209, 197, 0.15);
+  }
+  .errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0;
+    color: #f28b82;
+    font-size: 12px;
+  }
+  button {
+    margin-top: 24px;
+    width: 100%;
+    background: var(--accent);
+    color: #08151a;
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+  }
+  button:hover { background: #6fe0d4; }
+
+  .result {
+    margin-top: 24px;
+    border: 1px solid var(--accent-dim);
+    background: rgba(79, 209, 197, 0.06);
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .result .eyebrow { margin-bottom: 4px; }
+  .result h2 {
+    margin: 0 0 6px;
+    font-size: 22px;
+  }
+  .result p { color: var(--muted); margin: 0 0 16px; font-size: 14px; }
+  .stats {
+    display: flex;
+    gap: 24px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .stats span { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">RFM · K-Means</p>
+  <h1>Customer Segmentation</h1>
+  <p class="sub">
+    Enter a customer's Recency, Frequency, and Monetary values to see which
+    segment the trained model places them in.
+  </p>
+
+  <div class="panel">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="field">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          <p class="help">{{ field.help_text }}</p>
+          {{ field }}
+          {% if field.errors %}
+            <ul class="errorlist">
+              {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <button type="submit">Predict segment</button>
+    </form>
+  </div>
+
+  {% if result %}
+    <div class="result">
+      <p class="eyebrow">Cluster {{ result.cluster_id }}</p>
+      <h2>{{ result.label }}</h2>
+      <p>{{ result.description }}</p>
+      <div class="stats">
+        <div>PCA1: <span>{{ result.pca_x|floatformat:2 }}</span></div>
+        <div>PCA2: <span>{{ result.pca_y|floatformat:2 }}</span></div>
+      </div>
+    </div>
+  {% endif %}
+</div>
+</body>
+</html>
